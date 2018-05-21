@@ -1,0 +1,15 @@
+.MoreImages .container {
+  display:grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 10px;
+}
+
+.MoreImages .container h1 {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}
+
+.MoreImages .container div:last-child {
+  grid-column-start: 1;
+  grid-column-end: 3;
+}

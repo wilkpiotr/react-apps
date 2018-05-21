@@ -1,0 +1,26 @@
+.LikeMovies .like-movie{
+  color: yellowgreen;
+}
+
+.LikeMovies .container {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+
+}
+
+.LikeMovies .container .title {
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+
+.LikeMovies .container .table {
+  grid-row-start: 3;
+  grid-column-start: 1;
+  grid-column-end: 7;
+}
+
+.LikeMovies .favorite-count {
+  grid-column-start: 2;
+  grid-column-end: 4;
+  padding: 10px
+}

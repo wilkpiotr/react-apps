@@ -1,0 +1,20 @@
+.Users .container table {
+  width: 100%;
+}
+
+.Users .container {
+  text-align: left;
+}
+
+.Users hr {
+  background: black;
+}
+
+.Users .add-user {
+  padding-bottom: 10px;
+}
+
+.Users .container form {
+  text-align: left;
+  width: 400px;
+}
