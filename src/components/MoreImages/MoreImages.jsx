@@ -1,21 +1,59 @@
-import React from 'react';
+import React, { Component } from 'react';
 import './MoreImages.css';
+import Loader from '../Loader';
+import Images from './Images';
+import Button from './Button';
+import axios from 'axios';
 
-const MoreImages = () => {
-  return (<section className="section MoreImages project">
-  <div className="container">
-    <h1 className="title">More Images React App</h1>
-    {/* First component mount should fetch data and show the loader */}
-    <div><img src="/images/1.jpg" alt="1"/></div>
-    <div><img src="/images/2.jpg" alt="2"/></div> 
-    <div><img src="/images/3.jpg" alt="3"/></div> 
-    <div><img src="/images/4.jpg" alt="4"/></div>   
-    <div>
-      <a className="button is-large">Next Images</a> {/* Click on the button fetch next page */}
-      <a class="button is-loading is-large">Loading</a> {/* This button is shown during fetching of the next page */}
+class MoreImages extends Component {
+
+  state = { images: null,
+    page: 1,
+    loading: false}
+
+  handleAddImages = () => {
+    console.log(this.state.loading)
+    this.setState({loading: true})
+    axios
+    .get(`http://localhost:3000/images?_page=${this.state.page + 1}&_limit=4`)
+    .then((result) => {
+      const newImages = [...this.state.images, ...result.data];
+      this.setState((state) => {
+        console.log(this.state.loading)
+        return {images: newImages,
+        page: this.state.page + 1,
+      loading: false}
+      })
+    })
+  }
+
+  render() {
+
+    if (!this.state.images) {
+      return (<Loader/>)
+    } else 
+ 
+    return (<section className="section MoreImages project">
+    <div className="container">
+      <h1 className="title">More Images React App</h1>
+      {/* First component mount should fetch data and show the loader */}
+      <Images images={this.state.images}/>
+      <Button onClick={this.handleAddImages} loading={this.state.loading}/>
     </div>
-  </div>
-  </section>)
+    </section>)
+
+  }
+
+  componentDidMount() {
+    axios
+    .get('http://localhost:3000/images?_page=1&_limit=4')
+    .then((result) => {
+      this.setState({
+        images: result.data
+      })
+    })
+  }
+
 }
 
 export default MoreImages;
