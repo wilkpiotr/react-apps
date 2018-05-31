@@ -9,17 +9,20 @@ class Articles extends Component {
 
   state = { list: null,
   article: null,
-  id: 2 }
+  id: 0,
+  loading: false }
 
   handleSelectArticle = (id) => {
     this.setState((state) => {
-      return {id: id}
+      return {loading: true,
+        id: id}
     });
     axios
     .get('http://localhost:3000/articles/' + id)
     .then((result) => {
       this.setState({
-        article: result.data
+        article: result.data,
+        loading: false
       });
     })
   }
@@ -47,7 +50,7 @@ class Articles extends Component {
 
   render() {
     
-    if (!this.state.list || !this.state.article) {
+    if (!this.state.list) {
       return (<Loader/>)
     } 
     return (
@@ -60,7 +63,7 @@ class Articles extends Component {
           </div>
           {/* Clicking article on the list should show loader in the right side and fetch single article */}
           <div className="article">
-            <SingleArticle article={this.state.article}/>
+            <SingleArticle article={this.state.article} id={this.state.id} loading={this.state.loading}/>
           </div>
         </div>
       </section>  

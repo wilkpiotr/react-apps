@@ -1,5 +1,6 @@
 .article-list {
   border: 1px solid black;
+  height:100%;
 }
 
 .Articles .container {
