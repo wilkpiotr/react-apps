@@ -12,17 +12,15 @@ class MoreImages extends Component {
     loading: false}
 
   handleAddImages = () => {
-    console.log(this.state.loading)
     this.setState({loading: true})
     axios
     .get(`http://localhost:3000/images?_page=${this.state.page + 1}&_limit=4`)
     .then((result) => {
       const newImages = [...this.state.images, ...result.data];
       this.setState((state) => {
-        console.log(this.state.loading)
         return {images: newImages,
         page: this.state.page + 1,
-      loading: false}
+        loading: false}
       })
     })
   }
